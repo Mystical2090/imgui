@@ -1,11 +1,17 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 
+static bool noclipEnabled = false;
+
 $on_mod(Loaded) {
 	ImGuiCocos::get().setup([] {
 		ImGui::StyleColorsLight();
 	}).draw([] {
-		ImGui::ShowDemoWindow();
+		ImGui::Begin("Global");
+		ImGui::Text("noclip");
+		ImGui::SameLine();
+		ImGui::Checkbox("##noclip", &noclipEnabled);
+		ImGui::End();
 	});
 }
 
