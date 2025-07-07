@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS" OR IOS)
     set(CMAKE_OSX_ARCHITECTURES "arm64")
     add_definitions(-DGLES_SILENCE_DEPRECATION)
@@ -13,13 +12,12 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(test-mod)
 
-include(cmake/CPM.cmake)
-CPMAddPackage("gh:matcool/gd-imgui-cocos#653e533")
+CPMAddPackage("gh:matcool/gd-imgui-cocos#commithash") # specify a commit!
 
 add_library(test-mod SHARED main.cpp)
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
-target_link_libraries(test-mod imgui-cocos)
+target_link_libraries(${PROJECT_NAME} imgui-cocos)
 
 setup_geode_mod(test-mod)
