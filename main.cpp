@@ -21,7 +21,8 @@ $on_mod(Loaded) {
 	ImGuiCocos::get().setup([] {
 		ImGui::StyleColorsLight();
 	}).draw([] {
-		if (ImGui::BeginTabBar("polo")) {
+		ImGui::Begin("Polo", nullptr, ImGuiWindowFlags_NoCollapse);
+		if (ImGui::BeginTabBar("Polo")) {
 			if (ImGui::BeginTabItem("Global")) {
 				ImGui::Text("speedhack");
 				ImGui::SliderFloat("##speedhack", &speedhackValue, 0.0001f, 10000.0f, "%.5f");
@@ -46,6 +47,7 @@ $on_mod(Loaded) {
 			}
 			ImGui::EndTabBar();
 		}
+		ImGui::End();
 	});
 }
 
@@ -53,7 +55,7 @@ $on_mod(Loaded) {
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
 class $modify(ImGuiKeybindHook, cocos2d::CCKeyboardDispatcher) {
 	bool dispatchKeyboardMSG(cocos2d::enumKeyCodes key, bool isKeyDown, bool isKeyRepeat) {
-		if (key == cocos2d::enumKeyCodes::KEY_F4 && isKeyDown) {
+		if (key == cocos2d::enumKeyCodes::KEY_Tab && isKeyDown) {
 			ImGuiCocos::get().toggle();
 		}
 		return CCKeyboardDispatcher::dispatchKeyboardMSG(key, isKeyDown, isKeyRepeat);
