@@ -1,16 +1,27 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
+#include <Geode/modify/PlayLayer.hpp>
+
+using namespace geode::prelude;
 
 static bool noclipEnabled = false;
 static bool jumpHackEnabled = false;
 static bool autoclickerEnabled = false;
 static float speedhackValue = 1.0f;
 
+class $modify(NoclipHack, PlayLayer) {
+    void destroyPlayer(PlayerObject* player, GameObject* object) {
+        if (!noclipEnabled) {
+            PlayLayer::destroyPlayer(player, object);
+        }
+    }
+};
+
 $on_mod(Loaded) {
 	ImGuiCocos::get().setup([] {
 		ImGui::StyleColorsLight();
 	}).draw([] {
-		if (ImGui::BeginTabBar("ModTabs")) {
+		if (ImGui::BeginTabBar("polo")) {
 			if (ImGui::BeginTabItem("Global")) {
 				ImGui::Text("speedhack");
 				ImGui::SliderFloat("##speedhack", &speedhackValue, 0.0001f, 10000.0f, "%.5f");
