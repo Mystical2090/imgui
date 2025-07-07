@@ -34,7 +34,7 @@ endif()
 include(${CPM_DOWNLOAD_LOCATION})
 
 
-CPMAddPackage("gh:matcool/gd-imgui-cocos#commithash")
+CPMAddPackage("gh:matcool/gd-imgui-cocos#653e533")
 
 add_library(test-mod SHARED main.cpp)
 
