@@ -1,5 +1,6 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
+#include <Geode/modify/GJBaseGameLayer.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
@@ -17,6 +18,12 @@ class $modify(NoclipHack, PlayLayer) {
     }
 };
 
+class $modify(Speedhack, GJBaseGameLayer) {
+public:
+    void update(float dt) {
+        GJBaseGameLayer::update(dt * speedhackValue);
+    }
+};
 $on_mod(Loaded) {
 	ImGuiCocos::get().setup([] {
 		ImGui::StyleColorsLight();
