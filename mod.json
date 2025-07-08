@@ -6,9 +6,9 @@
 		"mac": "2.2074",
 		"ios": "2.2074"
 	},
-	"id": "mat.test-imgui",
+	"id": "mystic.polo.ui.test",
 	"name": "test-imgui",
 	"version": "1.0.0",
-	"developer": "mat",
+	"developer": "mystic",
 	"description": "t"
 }
