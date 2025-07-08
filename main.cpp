@@ -1,6 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 
+// dick
 using namespace geode::prelude;
 
 bool noclipEnabled = false;
@@ -17,7 +18,11 @@ $on_mod(Loaded) {
 			if (ImGui::BeginTabItem("Global")) {
 				ImGui::Text("speedhack");
 				ImGui::SameLine();
+#ifdef GEODE_IS_IOS
+				ImGui::InputFloat("##speedhack", &speedhackValue, 0.0f, 0.0f, "%.5f", ImGuiInputTextFlags_CharsDecimal);
+#else
 				ImGui::InputFloat("##speedhack", &speedhackValue, 0.0f, 0.0f, "%.5f");
+#endif
 				ImGui::EndTabItem();
 			}
 			if (ImGui::BeginTabItem("Creator")) {
