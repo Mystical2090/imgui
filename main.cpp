@@ -432,129 +432,132 @@ $on_mod(Loaded) {
                 
                 ImGui::EndTabItem();
             }
-            if (ImGui::BeginTabItem("Player")) {
-                ImGui::Text("noclip");
-                ImGui::SameLine();
-                ImGui::Checkbox("##noclip", &noclipEnabled);
-                
-                ImGui::Text("ignore inputs");
-                ImGui::SameLine();
-                ImGui::Checkbox("##ignoreinputs", &ignoreInputsEnabled);
-                
-                ImGui::Text("jump hack");
-                ImGui::SameLine();
-                ImGui::Checkbox("##jumphack", &jumpHackEnabled);
-                
-                ImGui::Text("autoclicker");
-                ImGui::SameLine();
-                ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
-                
-                if (ImGui::BeginTabItem("Settings")) {
-                    ImGui::Text("Theme Settings");
-                    ImGui::Separator();
+            // Replace the Player tab section with this:
+if (ImGui::BeginTabItem("Player")) {
+    ImGui::Text("noclip");
+    ImGui::SameLine();
+    ImGui::Checkbox("##noclip", &noclipEnabled);
+    
+    ImGui::Text("ignore inputs");
+    ImGui::SameLine();
+    ImGui::Checkbox("##ignoreinputs", &ignoreInputsEnabled);
+    
+    ImGui::Text("jump hack");
+    ImGui::SameLine();
+    ImGui::Checkbox("##jumphack", &jumpHackEnabled);
+    
+    ImGui::Text("autoclicker");
+    ImGui::SameLine();
+    ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
+    
+    ImGui::EndTabItem();
+}
 
-                    ImGui::Text("Select Theme:");
-                    if (ImGui::Combo("##theme_selector", &currentTheme, themeNames, IM_ARRAYSIZE(themeNames))) {
-                        applyTheme(currentTheme);
-                    }
-                    
-                    ImGui::Spacing();
+// Add Settings as a separate main tab:
+if (ImGui::BeginTabItem("Settings")) {
+    ImGui::Text("Theme Settings");
+    ImGui::Separator();
 
-                    if (ImGui::Button("Open Theme Editor")) {
-                        showThemeEditor = true;
-                    }
-                    
-                    ImGui::Spacing();
-                    ImGui::Separator();
+    ImGui::Text("Select Theme:");
+    if (ImGui::Combo("##theme_selector", &currentTheme, themeNames, IM_ARRAYSIZE(themeNames))) {
+        applyTheme(currentTheme);
+    }
+    
+    ImGui::Spacing();
 
-                    ImGui::Text("Quick Theme Preview:");
-                    ImGui::Columns(4, nullptr, false);
-                    
-                    if (ImGui::Button("Dark")) {
-                        currentTheme = 0;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Light")) {
-                        currentTheme = 1;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Classic")) {
-                        currentTheme = 2;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Cherry")) {
-                        currentTheme = 3;
-                        applyTheme(currentTheme);
-                    }
-                    
-                    ImGui::Columns(1);
-                    ImGui::Spacing();
-                    
-                    ImGui::Columns(4, nullptr, false);
-                    
-                    if (ImGui::Button("Dracula")) {
-                        currentTheme = 4;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Cyberpunk")) {
-                        currentTheme = 5;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Ocean")) {
-                        currentTheme = 6;
-                        applyTheme(currentTheme);
-                    }
-                    ImGui::NextColumn();
-                    
-                    if (ImGui::Button("Custom")) {
-                        currentTheme = 7;
-                        applyTheme(currentTheme);
-                        showThemeEditor = true;
-                    }
-                    
-                    ImGui::Columns(1);
-                    ImGui::Spacing();
-                    ImGui::Separator();
- 
-                    ImGui::Text("Current Theme: %s", themeNames[currentTheme]);
+    if (ImGui::Button("Open Theme Editor")) {
+        showThemeEditor = true;
+    }
+    
+    ImGui::Spacing();
+    ImGui::Separator();
 
-                    if (currentTheme == 7) {
-                        ImGui::Spacing();
-                        ImGui::Text("Custom Theme Controls:");
-                        
-                        if (ImGui::Button("Reset to Default Dark")) {
-                            applyDarkTheme();
-                            initializeCustomColors();
-                            ImGuiStyle& style = ImGui::GetStyle();
-                            for (int i = 0; i < ImGuiCol_COUNT; i++) {
-                                customColors[i] = style.Colors[i];
-                            }
-                        }
-                        ImGui::SameLine();
-                        
-                        if (ImGui::Button("Save Current as Custom")) {
-                            initializeCustomColors();
-                            ImGuiStyle& style = ImGui::GetStyle();
-                            for (int i = 0; i < ImGuiCol_COUNT; i++) {
-                                customColors[i] = style.Colors[i];
-                            }
-                        }
-                    }
-                    
-                    ImGui::EndTabItem();
-                }
-                
-                ImGui::EndTabItem();
+    ImGui::Text("Quick Theme Preview:");
+    ImGui::Columns(4, nullptr, false);
+    
+    if (ImGui::Button("Dark")) {
+        currentTheme = 0;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Light")) {
+        currentTheme = 1;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Classic")) {
+        currentTheme = 2;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Cherry")) {
+        currentTheme = 3;
+        applyTheme(currentTheme);
+    }
+    
+    ImGui::Columns(1);
+    ImGui::Spacing();
+    
+    ImGui::Columns(4, nullptr, false);
+    
+    if (ImGui::Button("Dracula")) {
+        currentTheme = 4;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Cyberpunk")) {
+        currentTheme = 5;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Ocean")) {
+        currentTheme = 6;
+        applyTheme(currentTheme);
+    }
+    ImGui::NextColumn();
+    
+    if (ImGui::Button("Custom")) {
+        currentTheme = 7;
+        applyTheme(currentTheme);
+        showThemeEditor = true;
+    }
+    
+    ImGui::Columns(1);
+    ImGui::Spacing();
+    ImGui::Separator();
+
+    ImGui::Text("Current Theme: %s", themeNames[currentTheme]);
+
+    if (currentTheme == 7) {
+        ImGui::Spacing();
+        ImGui::Text("Custom Theme Controls:");
+        
+        if (ImGui::Button("Reset to Default Dark")) {
+            applyDarkTheme();
+            initializeCustomColors();
+            ImGuiStyle& style = ImGui::GetStyle();
+            for (int i = 0; i < ImGuiCol_COUNT; i++) {
+                customColors[i] = style.Colors[i];
+            }
+        }
+        ImGui::SameLine();
+        
+        if (ImGui::Button("Save Current as Custom")) {
+            initializeCustomColors();
+            ImGuiStyle& style = ImGui::GetStyle();
+            for (int i = 0; i < ImGuiCol_COUNT; i++) {
+                customColors[i] = style.Colors[i];
+            }
+        }
+    }
+    
+    ImGui::EndTabItem();
+}
             }
             ImGui::EndTabBar();
         }
