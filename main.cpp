@@ -11,10 +11,10 @@ float speedhackValue = 1.0f;
 
 $on_mod(Loaded) {
 	ImGuiCocos::get().setup([] {
-		ImGui::StyleColorsLight();
+		ImGui::StyleColorsDark();
 	}).draw([] {
-		ImGui::Begin("Mod Menu", nullptr, ImGuiWindowFlags_NoCollapse);
-		if (ImGui::BeginTabBar("ModTabs")) {
+		ImGui::Begin("Polo", nullptr, ImGuiWindowFlags_NoCollapse);
+		if (ImGui::BeginTabBar("Polo")) {
 			if (ImGui::BeginTabItem("Global")) {
 				ImGui::Text("speedhack");
 				ImGui::SameLine();
