@@ -36,7 +36,7 @@ include(${CPM_DOWNLOAD_LOCATION})
 
 CPMAddPackage("gh:matcool/gd-imgui-cocos#653e533")
 
-add_library(test-mod SHARED main.cpp yes.cpp yes2.cpp)
+add_library(test-mod SHARED main.cpp speedhack.cpp noclip.cpp)
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
