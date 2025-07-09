@@ -1,23 +1,3 @@
-
-
-#include <Geode/Geode.hpp> #include <imgui-cocos.hpp> // #include "imgui.h" // ^ yes, useless it will crash if i use // the normal version. using namespace geode::prelude; // player bool noclipEnabled = false; bool ignoreInputsEnabled = false; bool jumpHackEnabled = false; bool autoclickerEnabled =
-
-pasted
-
-can you make it so that i can use imgui theming
-
-Edit
-I'll help you add ImGui theming support to your Geode mod. This will allow you to customize the appearance of your ImGui interface with different themes and styling options.
-
-
-ImGui Theming Support for Polo Mod
-Code 
-
-
-
-
-
-
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 // #include "imgui.h"
