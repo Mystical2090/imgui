@@ -311,7 +311,7 @@ void renderThemeEditor() {
 $on_mod(Loaded) {
     ImGuiCocos::get().setup([] {
         ImGui::StyleColorsDark();
-    }).draw([] {
+    }).draw([]() {
         ImGui::Begin("Polo", nullptr, ImGuiWindowFlags_NoCollapse);
         if (ImGui::BeginTabBar("Polo")) {
             if (ImGui::BeginTabItem("Misc")) {
