@@ -561,7 +561,7 @@ if (ImGui::BeginTabItem("Settings")) {
             }
             ImGui::EndTabBar();
         }
-        ImGui::End();
+        ) ImGui::End();
         
         renderThemeEditor();
     });
