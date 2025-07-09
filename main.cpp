@@ -565,8 +565,7 @@ if (ImGui::BeginTabItem("Settings")) {
         
         renderThemeEditor();
     });
-}
-
+)
 #ifndef GEODE_IS_IOS
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
 class $modify(ImGuiKeybindHook, cocos2d::CCKeyboardDispatcher) {
