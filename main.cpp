@@ -447,6 +447,43 @@ $on_mod(Loaded) {
 				ImGui::Text("autoclicker");
 				ImGui::SameLine();
 				ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
+
+			if (ImGui::BeginTabItem("Settings")) {
+				ImGui::Text("Theme Selection:");
+				if (ImGui::Combo("Theme##theme", &currentTheme, themeNames, IM_ARRAYSIZE(themeNames))) {
+					applyTheme(currentTheme);
+				}
+				
+				ImGui::Separator();
+				
+				if (currentTheme == 7) { // Custom theme
+					ImGui::Text("Custom Theme Editor:");
+					initializeCustomColors();
+					
+					if (ImGui::Button("Reset to Current Style")) {
+						ImGuiStyle& style = ImGui::GetStyle();
+						for (int i = 0; i < ImGuiCol_COUNT; i++) {
+							customColors[i] = style.Colors[i];
+						}
+					}
+					
+					ImGui::BeginChild("ColorEditor", ImVec2(0, 300), true);
+					for (int i = 0; i < ImGuiCol_COUNT; i++) {
+						ImGui::PushID(i);
+						ImGui::ColorEdit4(ImGui::GetStyleColorName(i), (float*)&customColors[i], 
+							ImGuiColorEditFlags_AlphaBar | ImGuiColorEditFlags_AlphaPreview);
+						ImGui::PopID();
+					}
+					ImGui::EndChild();
+					
+					if (ImGui::Button("Apply Custom Theme")) {
+						applyCustomTheme();
+					}
+				} else {
+					ImGui::Text("Selected Theme: %s", themeNames[currentTheme]);
+					ImGui::Text("Use the dropdown above to switch between themes.");
+					ImGui::Text("Select 'Custom' to create your own theme.");
+				}
 				
 				ImGui::EndTabItem();
 			}
