@@ -562,8 +562,10 @@ if (ImGui::BeginTabItem("Settings")) {
             ImGui::EndTabBar();
         }
         ImGui::End();
-    }); 
-});
+        
+        renderThemeEditor();
+    });
+}
 
 #ifndef GEODE_IS_IOS
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
