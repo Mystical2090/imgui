@@ -1,7 +1,8 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
-
-// dick
+// #include "imgui.h"
+// ^ yes, useless it will crash if i use
+// the normal version.
 using namespace geode::prelude;
 
 bool noclipEnabled = false;
