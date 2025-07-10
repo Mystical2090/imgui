@@ -1,4 +1,3 @@
-
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 // #include "imgui.h"
@@ -31,6 +30,7 @@ bool colorHackEnabled = false;
 bool noSolidsEnabled = false;
 bool suicideEnabled = false;
 bool showHitboxesEnabled = false;
+bool
 bool showHitboxesOnDeathEnabled = false;
 bool rainbowIconsEnabled = false;
 bool everythingKillsYouEnabled = false;
