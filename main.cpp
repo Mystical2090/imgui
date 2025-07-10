@@ -30,7 +30,7 @@ bool colorHackEnabled = false;
 bool noSolidsEnabled = false;
 bool suicideEnabled = false;
 bool showHitboxesEnabled = false;
-bool
+bool yes = false;
 bool showHitboxesOnDeathEnabled = false;
 bool rainbowIconsEnabled = false;
 bool everythingKillsYouEnabled = false;
