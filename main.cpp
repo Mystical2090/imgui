@@ -185,119 +185,13 @@ if (ImGui::BeginTabItem("Player")) {
     ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
     
     ImGui::EndTabItem();
-}
-
-if (ImGui::BeginTabItem("Settings")) {
-    ImGui::Text("Theme Settings");
-    ImGui::Separator();
-
-    ImGui::Text("Select Theme:");
-    if (ImGui::Combo("##theme_selector", &currentTheme, themeNames, IM_ARRAYSIZE(themeNames))) {
-        applyTheme(currentTheme);
-    }
-    
-    ImGui::Spacing();
-
-    if (ImGui::Button("Open Theme Editor")) {
-        showThemeEditor = true;
-    }
-    
-    ImGui::Spacing();
-    ImGui::Separator();
-
-    ImGui::Text("Quick Theme Preview:");
-    ImGui::Columns(4, nullptr, false);
-    
-    if (ImGui::Button("Dark")) {
-        currentTheme = 0;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Light")) {
-        currentTheme = 1;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Classic")) {
-        currentTheme = 2;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Cherry")) {
-        currentTheme = 3;
-        applyTheme(currentTheme);
-    }
-    
-    ImGui::Columns(1);
-    ImGui::Spacing();
-    
-    ImGui::Columns(4, nullptr, false);
-    
-    if (ImGui::Button("Dracula")) {
-        currentTheme = 4;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Cyberpunk")) {
-        currentTheme = 5;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Ocean")) {
-        currentTheme = 6;
-        applyTheme(currentTheme);
-    }
-    ImGui::NextColumn();
-    
-    if (ImGui::Button("Custom")) {
-        currentTheme = 7;
-        applyTheme(currentTheme);
-        showThemeEditor = true;
-    }
-    
-    ImGui::Columns(1);
-    ImGui::Spacing();
-    ImGui::Separator();
-
-    ImGui::Text("Current Theme: %s", themeNames[currentTheme]);
-
-    if (currentTheme == 7) {
-        ImGui::Spacing();
-        ImGui::Text("Custom Theme Controls:");
-        
-        if (ImGui::Button("Reset to Default Dark")) {
-            applyDarkTheme();
-            initializeCustomColors();
-            ImGuiStyle& style = ImGui::GetStyle();
-            for (int i = 0; i < ImGuiCol_COUNT; i++) {
-                customColors[i] = style.Colors[i];
-            }
-        }
-        ImGui::SameLine();
-        
-        if (ImGui::Button("Save Current as Custom")) {
-            initializeCustomColors();
-            ImGuiStyle& style = ImGui::GetStyle();
-            for (int i = 0; i < ImGuiCol_COUNT; i++) {
-                customColors[i] = style.Colors[i];
-            }
-        }
-    }
-    
+}   
     ImGui::EndTabItem();
 }
             }
             ImGui::EndTabBar();
         }
-        ); ImGui::End();
-        
-        renderThemeEditor();
-    };
+ImGui::End();
 
 #ifndef GEODE_IS_IOS
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
