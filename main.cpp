@@ -166,7 +166,7 @@ $on_mod(Loaded) {
                 
                 ImGui::EndTabItem();
             }
-            // Replace the Player tab section with this:
+
 if (ImGui::BeginTabItem("Player")) {
     ImGui::Text("noclip");
     ImGui::SameLine();
@@ -185,13 +185,12 @@ if (ImGui::BeginTabItem("Player")) {
     ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
     
     ImGui::EndTabItem();
-}   
-    ImGui::EndTabItem();
 }
-            }
             ImGui::EndTabBar();
         }
-ImGui::End();
+        ImGui::End();
+    });
+}
 
 #ifndef GEODE_IS_IOS
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
