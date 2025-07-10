@@ -187,7 +187,6 @@ if (ImGui::BeginTabItem("Player")) {
     ImGui::EndTabItem();
 }
 
-// Add Settings as a separate main tab:
 if (ImGui::BeginTabItem("Settings")) {
     ImGui::Text("Theme Settings");
     ImGui::Separator();
