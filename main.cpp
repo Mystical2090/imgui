@@ -6,41 +6,41 @@
 using namespace geode::prelude;
 
 // player
-bool noclipEnabled = false;
-bool ignoreInputsEnabled = false;
-bool jumpHackEnabled = false;
-bool autoclickerEnabled = false;
+bool noclipEnabled = false; // done
+bool ignoreInputsEnabled = false; // done
+bool jumpHackEnabled = false; // done
+bool autoclickerEnabled = false; // done
 
 // editor
-bool verifyHackEnabled = false;
-bool copyHackEnabled = false;
-bool noCMarkEnabled = false;
-bool customObjectsBypassEnabled = false;
+bool verifyHackEnabled = false; // done
+bool copyHackEnabled = false; // done
+bool noCMarkEnabled = false; // done
+bool customObjectsBypassEnabled = false; // done
 
 // misc
-float speedhackValue = 1.0f;
-float noWavePulseValue = 1.0f;
-bool practiceMusicHackEnabled = false;
-bool hidePauseButtonEnabled = false;
-bool layoutModeEnabled = false;
-bool commentHistoryBypassEnabled = false;
-bool autoPracticeEnabled = false;
-bool iconHackEnabled = false;
-bool colorHackEnabled = false;
-bool noSolidsEnabled = false;
-bool suicideEnabled = false;
-bool showHitboxesEnabled = false;
-bool yes = false;
-bool showHitboxesOnDeathEnabled = false;
-bool rainbowIconsEnabled = false;
-bool everythingKillsYouEnabled = false;
-bool safeModeEnabled = false;
-bool instantCompleteEnabled = false;
-bool basementBypassEnabled = false;
-bool levelEditEnabled = false;
-bool mainLevelBypassEnabled = false;
-bool towerBypassEnabled = false;
-bool noGlowEnabled = false;
+float speedhackValue = 1.0f; // done
+float noWavePulseValue = 1.0f; // done
+bool practiceMusicHackEnabled = false; // done
+bool hidePauseButtonEnabled = false; // done
+bool layoutModeEnabled = false; // done
+bool commentHistoryBypassEnabled = false; // done
+bool autoPracticeEnabled = false; // done
+bool iconHackEnabled = false; // done
+bool colorHackEnabled = false; // done
+bool noSolidsEnabled = false; // done
+bool suicideEnabled = false; // done
+bool showHitboxesEnabled = false; // done
+bool yes = false; // done
+bool showHitboxesOnDeathEnabled = false; // done
+bool rainbowIconsEnabled = false; // done
+bool everythingKillsYouEnabled = false; // done
+bool safeModeEnabled = false; // done
+bool instantCompleteEnabled = false; // done
+bool basementBypassEnabled = false; // done
+bool levelEditEnabled = false; // done
+bool mainLevelBypassEnabled = false; // done
+bool towerBypassEnabled = false; // done
+bool noGlowEnabled = false; // done
 
 std::string getSettingsPath() {
     return (Mod::get()->getConfigDir() / "polo_settings.txt").string();
