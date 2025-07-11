@@ -183,7 +183,21 @@ if (ImGui::BeginTabItem("Player")) {
     ImGui::Text("autoclicker");
     ImGui::SameLine();
     ImGui::Checkbox("##autoclicker", &autoclickerEnabled);
-    
+    ImGui::EndTabItem();
+    }
+            
+if (ImGui::BeginTabItem("Credits")) {
+    ImGui::Text("Gtxx9003, Developer, Features, more..");
+    ImGui::Text("Mystical433, Leader Developer, Features, ui, more...");
+    ImGui::Text("Speedyfriend67, Developer, Bug fixes");
+    ImGui::EndTabItem();
+}
+
+if (ImGui::BeginTabItem("Info")) {
+    ImGui::Text("Polo version v1.0.0");
+    ImGui::Text("Nightly Release: ");
+    ImGui::SameLine();
+    ImGui::Text("False");
     ImGui::EndTabItem();
 }
             ImGui::EndTabBar();
