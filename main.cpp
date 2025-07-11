@@ -390,9 +390,7 @@ $on_mod(Loaded) {
     });
 }
 
-$on_mod(Unloaded) {
-    saveSettings(); // Save settings when mod is unloaded
-}
+
 
 #ifndef GEODE_IS_IOS
 #include <Geode/modify/CCKeyboardDispatcher.hpp>
