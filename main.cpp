@@ -1,10 +1,9 @@
 #include <Geode/Geode.hpp>
 #include <imgui-cocos.hpp>
 #include <fstream>
-#include <nlohmann/json.hpp>
+#include <sstream>
 
 using namespace geode::prelude;
-using json = nlohmann::json;
 
 // player
 bool noclipEnabled = false;
@@ -44,51 +43,48 @@ bool towerBypassEnabled = false;
 bool noGlowEnabled = false;
 
 std::string getSettingsPath() {
-    return (Mod::get()->getConfigDir() / "polo_settings.json").string();
+    return (Mod::get()->getConfigDir() / "polo_settings.txt").string();
 }
 
 void saveSettings() {
-    json settings;
-    
-    // Player settings
-    settings["player"]["noclip"] = noclipEnabled;
-    settings["player"]["ignoreInputs"] = ignoreInputsEnabled;
-    settings["player"]["jumpHack"] = jumpHackEnabled;
-    settings["player"]["autoclicker"] = autoclickerEnabled;
-    
-    // Editor settings
-    settings["editor"]["verifyHack"] = verifyHackEnabled;
-    settings["editor"]["copyHack"] = copyHackEnabled;
-    settings["editor"]["noCMark"] = noCMarkEnabled;
-    settings["editor"]["customObjectsBypass"] = customObjectsBypassEnabled;
-    
-    // Misc settings
-    settings["misc"]["speedhackValue"] = speedhackValue;
-    settings["misc"]["noWavePulseValue"] = noWavePulseValue;
-    settings["misc"]["practiceMusicHack"] = practiceMusicHackEnabled;
-    settings["misc"]["hidePauseButton"] = hidePauseButtonEnabled;
-    settings["misc"]["layoutMode"] = layoutModeEnabled;
-    settings["misc"]["commentHistoryBypass"] = commentHistoryBypassEnabled;
-    settings["misc"]["autoPractice"] = autoPracticeEnabled;
-    settings["misc"]["iconHack"] = iconHackEnabled;
-    settings["misc"]["colorHack"] = colorHackEnabled;
-    settings["misc"]["noSolids"] = noSolidsEnabled;
-    settings["misc"]["suicide"] = suicideEnabled;
-    settings["misc"]["showHitboxes"] = showHitboxesEnabled;
-    settings["misc"]["showHitboxesOnDeath"] = showHitboxesOnDeathEnabled;
-    settings["misc"]["rainbowIcons"] = rainbowIconsEnabled;
-    settings["misc"]["everythingKillsYou"] = everythingKillsYouEnabled;
-    settings["misc"]["safeMode"] = safeModeEnabled;
-    settings["misc"]["instantComplete"] = instantCompleteEnabled;
-    settings["misc"]["basementBypass"] = basementBypassEnabled;
-    settings["misc"]["levelEdit"] = levelEditEnabled;
-    settings["misc"]["mainLevelBypass"] = mainLevelBypassEnabled;
-    settings["misc"]["towerBypass"] = towerBypassEnabled;
-    settings["misc"]["noGlow"] = noGlowEnabled;
-    
     std::ofstream file(getSettingsPath());
     if (file.is_open()) {
-        file << settings.dump(4);
+        // Player settings
+        file << "noclip=" << noclipEnabled << "\n";
+        file << "ignoreInputs=" << ignoreInputsEnabled << "\n";
+        file << "jumpHack=" << jumpHackEnabled << "\n";
+        file << "autoclicker=" << autoclickerEnabled << "\n";
+        
+        // Editor settings
+        file << "verifyHack=" << verifyHackEnabled << "\n";
+        file << "copyHack=" << copyHackEnabled << "\n";
+        file << "noCMark=" << noCMarkEnabled << "\n";
+        file << "customObjectsBypass=" << customObjectsBypassEnabled << "\n";
+        
+        // Misc settings
+        file << "speedhackValue=" << speedhackValue << "\n";
+        file << "noWavePulseValue=" << noWavePulseValue << "\n";
+        file << "practiceMusicHack=" << practiceMusicHackEnabled << "\n";
+        file << "hidePauseButton=" << hidePauseButtonEnabled << "\n";
+        file << "layoutMode=" << layoutModeEnabled << "\n";
+        file << "commentHistoryBypass=" << commentHistoryBypassEnabled << "\n";
+        file << "autoPractice=" << autoPracticeEnabled << "\n";
+        file << "iconHack=" << iconHackEnabled << "\n";
+        file << "colorHack=" << colorHackEnabled << "\n";
+        file << "noSolids=" << noSolidsEnabled << "\n";
+        file << "suicide=" << suicideEnabled << "\n";
+        file << "showHitboxes=" << showHitboxesEnabled << "\n";
+        file << "showHitboxesOnDeath=" << showHitboxesOnDeathEnabled << "\n";
+        file << "rainbowIcons=" << rainbowIconsEnabled << "\n";
+        file << "everythingKillsYou=" << everythingKillsYouEnabled << "\n";
+        file << "safeMode=" << safeModeEnabled << "\n";
+        file << "instantComplete=" << instantCompleteEnabled << "\n";
+        file << "basementBypass=" << basementBypassEnabled << "\n";
+        file << "levelEdit=" << levelEditEnabled << "\n";
+        file << "mainLevelBypass=" << mainLevelBypassEnabled << "\n";
+        file << "towerBypass=" << towerBypassEnabled << "\n";
+        file << "noGlow=" << noGlowEnabled << "\n";
+        
         file.close();
     }
 }
@@ -99,56 +95,51 @@ void loadSettings() {
         return; // File doesn't exist, use defaults
     }
     
-    try {
-        json settings;
-        file >> settings;
-        file.close();
-        
-        // Player settings
-        if (settings.contains("player")) {
-            noclipEnabled = settings["player"].value("noclip", false);
-            ignoreInputsEnabled = settings["player"].value("ignoreInputs", false);
-            jumpHackEnabled = settings["player"].value("jumpHack", false);
-            autoclickerEnabled = settings["player"].value("autoclicker", false);
+    std::string line;
+    while (std::getline(file, line)) {
+        size_t pos = line.find('=');
+        if (pos != std::string::npos) {
+            std::string key = line.substr(0, pos);
+            std::string value = line.substr(pos + 1);
+            
+            // Player settings
+            if (key == "noclip") noclipEnabled = (value == "1");
+            else if (key == "ignoreInputs") ignoreInputsEnabled = (value == "1");
+            else if (key == "jumpHack") jumpHackEnabled = (value == "1");
+            else if (key == "autoclicker") autoclickerEnabled = (value == "1");
+            
+            // Editor settings
+            else if (key == "verifyHack") verifyHackEnabled = (value == "1");
+            else if (key == "copyHack") copyHackEnabled = (value == "1");
+            else if (key == "noCMark") noCMarkEnabled = (value == "1");
+            else if (key == "customObjectsBypass") customObjectsBypassEnabled = (value == "1");
+            
+            // Misc settings
+            else if (key == "speedhackValue") speedhackValue = std::stof(value);
+            else if (key == "noWavePulseValue") noWavePulseValue = std::stof(value);
+            else if (key == "practiceMusicHack") practiceMusicHackEnabled = (value == "1");
+            else if (key == "hidePauseButton") hidePauseButtonEnabled = (value == "1");
+            else if (key == "layoutMode") layoutModeEnabled = (value == "1");
+            else if (key == "commentHistoryBypass") commentHistoryBypassEnabled = (value == "1");
+            else if (key == "autoPractice") autoPracticeEnabled = (value == "1");
+            else if (key == "iconHack") iconHackEnabled = (value == "1");
+            else if (key == "colorHack") colorHackEnabled = (value == "1");
+            else if (key == "noSolids") noSolidsEnabled = (value == "1");
+            else if (key == "suicide") suicideEnabled = (value == "1");
+            else if (key == "showHitboxes") showHitboxesEnabled = (value == "1");
+            else if (key == "showHitboxesOnDeath") showHitboxesOnDeathEnabled = (value == "1");
+            else if (key == "rainbowIcons") rainbowIconsEnabled = (value == "1");
+            else if (key == "everythingKillsYou") everythingKillsYouEnabled = (value == "1");
+            else if (key == "safeMode") safeModeEnabled = (value == "1");
+            else if (key == "instantComplete") instantCompleteEnabled = (value == "1");
+            else if (key == "basementBypass") basementBypassEnabled = (value == "1");
+            else if (key == "levelEdit") levelEditEnabled = (value == "1");
+            else if (key == "mainLevelBypass") mainLevelBypassEnabled = (value == "1");
+            else if (key == "towerBypass") towerBypassEnabled = (value == "1");
+            else if (key == "noGlow") noGlowEnabled = (value == "1");
         }
-        
-        // Editor settings
-        if (settings.contains("editor")) {
-            verifyHackEnabled = settings["editor"].value("verifyHack", false);
-            copyHackEnabled = settings["editor"].value("copyHack", false);
-            noCMarkEnabled = settings["editor"].value("noCMark", false);
-            customObjectsBypassEnabled = settings["editor"].value("customObjectsBypass", false);
-        }
-        
-        // Misc settings
-        if (settings.contains("misc")) {
-            speedhackValue = settings["misc"].value("speedhackValue", 1.0f);
-            noWavePulseValue = settings["misc"].value("noWavePulseValue", 1.0f);
-            practiceMusicHackEnabled = settings["misc"].value("practiceMusicHack", false);
-            hidePauseButtonEnabled = settings["misc"].value("hidePauseButton", false);
-            layoutModeEnabled = settings["misc"].value("layoutMode", false);
-            commentHistoryBypassEnabled = settings["misc"].value("commentHistoryBypass", false);
-            autoPracticeEnabled = settings["misc"].value("autoPractice", false);
-            iconHackEnabled = settings["misc"].value("iconHack", false);
-            colorHackEnabled = settings["misc"].value("colorHack", false);
-            noSolidsEnabled = settings["misc"].value("noSolids", false);
-            suicideEnabled = settings["misc"].value("suicide", false);
-            showHitboxesEnabled = settings["misc"].value("showHitboxes", false);
-            showHitboxesOnDeathEnabled = settings["misc"].value("showHitboxesOnDeath", false);
-            rainbowIconsEnabled = settings["misc"].value("rainbowIcons", false);
-            everythingKillsYouEnabled = settings["misc"].value("everythingKillsYou", false);
-            safeModeEnabled = settings["misc"].value("safeMode", false);
-            instantCompleteEnabled = settings["misc"].value("instantComplete", false);
-            basementBypassEnabled = settings["misc"].value("basementBypass", false);
-            levelEditEnabled = settings["misc"].value("levelEdit", false);
-            mainLevelBypassEnabled = settings["misc"].value("mainLevelBypass", false);
-            towerBypassEnabled = settings["misc"].value("towerBypass", false);
-            noGlowEnabled = settings["misc"].value("noGlow", false);
-        }
-    } catch (const std::exception& e) {
-        // If JSON parsing fails, use defaults
-        log::error("Failed to load settings: {}", e.what());
     }
+    file.close();
 }
 
 $on_mod(Loaded) {
